@@ -33,8 +33,8 @@
 </template>
 
 <script setup>
-  import axios from 'axios' // Add this import
-  import {
+  import axios from 'axios'; // Add this import
+import {
     CategoryScale,
     Chart as ChartJS,
     Legend,
@@ -42,9 +42,9 @@
     PointElement,
     Title,
     Tooltip,
-  } from 'chart.js'
-  import { onMounted, reactive, ref } from 'vue'
-  import { Scatter } from 'vue-chartjs'
+} from 'chart.js';
+import { onMounted, reactive, ref } from 'vue';
+import { Scatter } from 'vue-chartjs';
 
   ChartJS.register(
     Title,
@@ -130,12 +130,17 @@
   }
 
   const handleFileUpload = async (event) => {
-    const file = event.target.files[0]
-    if (!file) return
+    const file = event.target.files?.[0]
+    if (!file) {
+      console.log('No file selected')
+      return
+    }
 
     if (!file.name.endsWith('.xlsx')) {
       alert('Please upload only Excel files (.xlsx)')
-      event.target.value = ''
+      if (event.target) {
+        event.target.value = ''
+      }
       return
     }
 
@@ -153,7 +158,8 @@
         }
       )
       console.log(response.data)
-      //await fetchData(); // Refresh data after successful upload
+      // Uncomment the following line if you want to refresh data after upload
+      // await fetchData()
     } catch (error) {
       console.error('Error uploading file:', error)
       alert('Error uploading file. Please try again.')
