@@ -112,12 +112,12 @@ const handleFileUpload = async (event) => {
   formData.append('file', file);
 
   try {
-    await axios.post('http://localhost:3000/upload_file', formData, {
+    const response = await axios.post('http://localhost:3000/upload_file', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     });
-    console.log('File uploaded successfully!');
+    console.log(response.data);
     //await fetchData(); // Refresh data after successful upload
   } catch (error) {
     console.error('Error uploading file:', error);
