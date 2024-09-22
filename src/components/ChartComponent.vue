@@ -11,7 +11,6 @@
     </div>
     <button @click="fetchData" class="refresh-button">Refresh Data</button>
 
-    <!-- Add file upload functionality -->
     <div>
       <input type="file" @change="handleFileUpload" ref="fileInput" style="display: none;">
       <button @click="triggerFileUpload" class="upload-button">Upload File</button>
@@ -108,8 +107,8 @@ const handleFileUpload = async (event) => {
         'Content-Type': 'multipart/form-data'
       }
     });
-    alert('File uploaded successfully!');
-    await fetchData(); // Refresh data after successful upload
+    console.log('File uploaded successfully!');
+    //await fetchData(); // Refresh data after successful upload
   } catch (error) {
     console.error('Error uploading file:', error);
     alert('Error uploading file. Please try again.');
