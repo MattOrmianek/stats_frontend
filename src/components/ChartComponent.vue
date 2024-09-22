@@ -15,6 +15,12 @@
       <input type="file" @change="handleFileUpload" ref="fileInput" style="display: none;">
       <button @click="triggerFileUpload" class="upload-button">Upload File</button>
     </div>
+
+    <div class="chart-controls">
+      <input v-model="numPoints" type="number" placeholder="Number of points">
+      <input v-model="minValue" type="number" placeholder="Min value">
+      <input v-model="maxValue" type="number" placeholder="Max value">
+    </div>
   </div>
 </template>
 
@@ -77,9 +83,13 @@ const chartOptions = {
 const chartKey = ref(0);
 const fileInput = ref(null);
 
+const numPoints = ref(100);
+const minValue = ref(0);
+const maxValue = ref(100);
+
 const fetchData = async () => {
   try {
-    const response = await fetch('http://localhost:3000/get_data');
+    const response = await fetch(`http://localhost:3000/get_random_data?num_points=${numPoints.value}&min_value=${minValue.value}&max_value=${maxValue.value}`);
     const data = await response.json();
     chartData.datasets[0].data = data.map(([x, y]) => ({ x, y }));
     chartKey.value++;
@@ -158,5 +168,16 @@ const handleFileUpload = async (event) => {
 
 .upload-button:hover {
   background-color: #007B9A;
+}
+
+.chart-controls {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.chart-controls input {
+  padding: 5px;
+  font-size: 16px;
 }
 </style>
