@@ -108,6 +108,12 @@ const handleFileUpload = async (event) => {
   const file = event.target.files[0];
   if (!file) return;
 
+  if (!file.name.endsWith('.xlsx')) {
+    alert('Please upload only Excel files (.xlsx)');
+    event.target.value = '';
+    return;
+  }
+
   const formData = new FormData();
   formData.append('file', file);
 
