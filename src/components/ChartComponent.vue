@@ -58,9 +58,11 @@
   const chartData = reactive({
     datasets: [
       {
-        label: 'Data Points',
-        backgroundColor: '#affb23',
+        label: null, // Set label to null to remove it without affecting colors
         data: [],
+        backgroundColor: '#affb23',
+        borderColor: '#affa23',
+        borderWidth: 1,
       },
     ],
   })
@@ -89,11 +91,7 @@
     },
     plugins: {
       legend: {
-        labels: {
-          font: {
-            size: 16,
-          },
-        },
+        display: false,
       },
       tooltip: {
         bodyFont: {
