@@ -19,7 +19,7 @@ import { Scatter } from 'vue-chartjs';
 
 ChartJS.register(Title, Tooltip, Legend, PointElement, LinearScale, CategoryScale)
 
-import { onMounted, ref, reactive } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 
 export default {
   name: 'ChartComponent',
@@ -81,9 +81,9 @@ export default {
 }
 
 .chart-container {
-  width: 60%;
-  max-width: 800px;
-  height: 400px;
+  width: 80vh;
+  height: 40vh; /* 80% of the viewport height */
+  max-width: none; /* Remove max-width restriction */
 }
 
 .refresh-button {
