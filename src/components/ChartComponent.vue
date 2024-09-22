@@ -13,63 +13,75 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { CategoryScale, Chart as ChartJS, Legend, LinearScale, PointElement, Title, Tooltip } from 'chart.js';
+import { onMounted, reactive, ref } from 'vue';
 import { Scatter } from 'vue-chartjs';
 
-ChartJS.register(Title, Tooltip, Legend, PointElement, LinearScale, CategoryScale)
+ChartJS.register(Title, Tooltip, Legend, PointElement, LinearScale, CategoryScale);
 
-import { onMounted, reactive, ref } from 'vue';
+const chartData = reactive({
+  datasets: [
+    {
+      label: 'Data Points',
+      backgroundColor: '#affb23',
+      data: []
+    }
+  ]
+});
 
-export default {
-  name: 'ChartComponent',
-  components: { Scatter },
-  setup() {
-    const chartData = reactive({
-      datasets: [
-        {
-          label: 'Data Points',
-          backgroundColor: '#f87979',
-          data: []
+const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  scales: {
+    x: {
+      type: 'linear',
+      position: 'bottom',
+      ticks: {
+        font: {
+          size: 20
         }
-      ]
-    })
-
-    const chartOptions = {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        x: {
-          type: 'linear',
-          position: 'bottom'
-        },
-        y: {
-          type: 'linear'
+      }
+    },
+    y: {
+      type: 'linear',
+      ticks: {
+        font: {
+          size: 20
         }
       }
     }
-
-    const chartKey = ref(0)
-
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/get_data')
-        const data = await response.json()
-        console.log('Fetched Data:', data)
-        chartData.datasets[0].data = data.map(point => ({ x: point[0], y: point[1] }))
-        // Increment the key to force re-render
-        chartKey.value += 1
-        console.log('Transformed Data:', chartData.datasets[0].data)
-      } catch (error) {
-        console.error('Error fetching data:', error)
+  },
+  plugins: {
+    legend: {
+      labels: {
+        font: {
+          size: 16
+        }
+      }
+    },
+    tooltip: {
+      bodyFont: {
+        size: 14
       }
     }
-
-    onMounted(fetchData)
-
-    return { chartData, chartOptions, fetchData, chartKey }
   }
-}
+};
+
+const chartKey = ref(0);
+
+const fetchData = async () => {
+  try {
+    const response = await fetch('http://localhost:3000/get_data');
+    const data = await response.json();
+    chartData.datasets[0].data = data.map(([x, y]) => ({ x, y }));
+    chartKey.value++;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+onMounted(fetchData);
 </script>
 
 <style scoped>
@@ -81,9 +93,9 @@ export default {
 }
 
 .chart-container {
-  width: 80vh;
-  height: 40vh; /* 80% of the viewport height */
-  max-width: none; /* Remove max-width restriction */
+  width: 100vh;
+  height: 60vh;
+  max-width: none;
 }
 
 .refresh-button {
@@ -94,7 +106,7 @@ export default {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 34px;
 }
 
 .refresh-button:hover {

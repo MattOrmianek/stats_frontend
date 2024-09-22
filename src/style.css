@@ -25,7 +25,7 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  align-items: flex-start; /* Change from 'center' to 'flex-start' */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -33,6 +33,10 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+#title {
+  font-size: 120px;
 }
 
 button {
@@ -61,7 +65,7 @@ button:focus-visible {
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem; /* Reduce padding from 2rem to 1rem */
   text-align: center;
 }
 

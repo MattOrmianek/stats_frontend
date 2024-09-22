@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <h1>Data Chart</h1>
+    <h1 id="title">Data Chart</h1>
     <ChartComponent />
   </div>
 </template>
 
 <script>
-import ChartComponent from './components/ChartComponent.vue'
+import ChartComponent from './components/ChartComponent.vue';
 
 export default {
   name: 'App',
