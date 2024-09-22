@@ -2,9 +2,9 @@ name: ESLint
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ['master']
   pull_request:
-    branches: [ "master" ]
+    branches: ['master']
   schedule:
     - cron: '29 23 * * 0'
 
@@ -25,7 +25,7 @@ jobs:
 
       - name: Run ESLint
         env:
-          SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
+          SARIF_ESLINT_IGNORE_SUPPRESSED: 'true'
         run: |
           npx eslint . \
             --format @microsoft/eslint-formatter-sarif \
