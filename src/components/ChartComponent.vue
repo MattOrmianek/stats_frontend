@@ -33,8 +33,8 @@
 </template>
 
 <script setup>
-  import axios from 'axios'; // Add this import
-import {
+  import axios from 'axios' // Add this import
+  import {
     CategoryScale,
     Chart as ChartJS,
     Legend,
@@ -42,9 +42,9 @@ import {
     PointElement,
     Title,
     Tooltip,
-} from 'chart.js';
-import { onMounted, reactive, ref } from 'vue';
-import { Scatter } from 'vue-chartjs';
+  } from 'chart.js'
+  import { onMounted, reactive, ref } from 'vue'
+  import { Scatter } from 'vue-chartjs'
 
   ChartJS.register(
     Title,

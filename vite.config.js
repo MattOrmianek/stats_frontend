@@ -8,8 +8,8 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./tests/setup.js'],
     deps: {
-      inline: ['@vue', '@vueuse', 'vue-demi']
-    }
+      inline: ['@vue', '@vueuse', 'vue-demi'],
+    },
   },
   resolve: {
     alias: {

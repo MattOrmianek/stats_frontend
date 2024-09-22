@@ -17,12 +17,14 @@ This project is a Vue 3 application built with Vite, featuring a dynamic chart c
 ## Getting Started
 
 1. Clone the repository:
+
    ```
    git clone <repository-url>
    cd <repository-name>
    ```
 
 2. Install dependencies:
+
    ```
    npm install
    # or
@@ -32,6 +34,7 @@ This project is a Vue 3 application built with Vite, featuring a dynamic chart c
    ```
 
 3. Start the development server:
+
    ```
    npm run dev
    # or
@@ -67,6 +70,7 @@ This project is a Vue 3 application built with Vite, featuring a dynamic chart c
 Bun is a fast all-in-one JavaScript runtime. To use Bun with this project:
 
 1. Install Bun:
+
    ```
    curl -fsSL https://bun.sh/install | bash
    ```
