@@ -10,10 +10,17 @@
       <p v-else>Loading data...</p>
     </div>
     <button @click="fetchData" class="refresh-button">Refresh Data</button>
+
+    <!-- Add file upload functionality -->
+    <div>
+      <input type="file" @change="handleFileUpload" ref="fileInput" style="display: none;">
+      <button @click="triggerFileUpload" class="upload-button">Upload File</button>
+    </div>
   </div>
 </template>
 
 <script setup>
+import axios from 'axios'; // Add this import
 import { CategoryScale, Chart as ChartJS, Legend, LinearScale, PointElement, Title, Tooltip } from 'chart.js';
 import { onMounted, reactive, ref } from 'vue';
 import { Scatter } from 'vue-chartjs';
@@ -69,6 +76,7 @@ const chartOptions = {
 };
 
 const chartKey = ref(0);
+const fileInput = ref(null);
 
 const fetchData = async () => {
   try {
@@ -82,6 +90,31 @@ const fetchData = async () => {
 };
 
 onMounted(fetchData);
+
+const triggerFileUpload = () => {
+  fileInput.value.click();
+};
+
+const handleFileUpload = async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    await axios.post('http://localhost:3000/upload_file', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    alert('File uploaded successfully!');
+    await fetchData(); // Refresh data after successful upload
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    alert('Error uploading file. Please try again.');
+  }
+};
 </script>
 
 <style scoped>
@@ -111,5 +144,20 @@ onMounted(fetchData);
 
 .refresh-button:hover {
   background-color: #45a049;
+}
+
+.upload-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.upload-button:hover {
+  background-color: #007B9A;
 }
 </style>
