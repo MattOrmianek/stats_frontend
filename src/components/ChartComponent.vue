@@ -12,7 +12,7 @@
     <button @click="fetchData" class="refresh-button">Refresh Data</button>
 
     <div>
-      <input type="file" @change="handleFileUpload" ref="fileInput" style="display: none;">
+      <input type="file" @change="handleFileUpload" ref="fileInput" accept=".xlsx" style="display: none;">
       <button @click="triggerFileUpload" class="upload-button">Upload File</button>
     </div>
 
